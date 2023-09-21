@@ -3,11 +3,14 @@ from selenium import webdriver
 from time import sleep
 from pages.sale_page import SalePage
 from pages.login_page import LoginPage
+from selenium.webdriver.chrome.options import Options
 
 
 @pytest.fixture()
 def driver():
-    chrome_driver = webdriver.Chrome()
+    options = Options()
+    options.add_argument('--headless')
+    chrome_driver = webdriver.Chrome(options=options)
     sleep(3)
     return chrome_driver
 
