@@ -4,9 +4,12 @@ import allure
 @allure.feature('Login')
 @allure.story('Negative')
 def test_error_login(login_page):
-    login_page.open()
-    login_page.click_send_button()
-    assert login_page.email_error_text_is('A login and a password are required.')
+    with allure.step('Open login page'):
+        login_page.open()
+    with allure.step('Click send button'):
+        login_page.click_send_button()
+    with allure.step('Check that error text is correct'):
+        assert login_page.email_error_text_is('A login and a password are required.')
 
 
 @allure.feature('Login')
