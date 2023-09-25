@@ -1,6 +1,17 @@
 name: Automates tests
 
-on: [push]
+on:
+  workflow_dispatch:
+    inputs:
+      deployment_target:
+        description: Choose option
+        required: true
+        default: first_test
+        type: choice
+        options:
+          - first_test
+          - ldskjsd
+          - sdlkjsdf
 
 jobs:
   run-tests:
@@ -13,7 +24,7 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: "3.10"
-      - name: Set up depandancies
+      - name: Set up dependancies
         run: pip install -r requirements.txt
       - name: Run tests
         run: pytest
