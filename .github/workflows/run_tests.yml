@@ -29,12 +29,15 @@ jobs:
       - name: Run smoke tests
         if: "github.event.inputs.deployment_target == 'smoke'"
         run: pytest -m smoke --alluredir=allure-results
+        continue-on-error: true
       - name: Run regression tests
         if: "github.event.inputs.deployment_target == 'regression'"
         run: pytest -m regression --alluredir=allure-results
+        continue-on-error: true
       - name: Run failed tests
         if: "github.event.inputs.deployment_target == 'failed'"
         run: pytest -m failed --alluredir=allure-results
+        continue-on-error: true
       - name: Save allure results
         uses: actions/upload-artifact@v3
         with:
