@@ -1,6 +1,8 @@
 import allure
+import pytest
 
 
+@pytest.mark.failed
 @allure.feature('Login')
 @allure.story('Negative')
 def test_error_login(login_page):
@@ -12,6 +14,7 @@ def test_error_login(login_page):
         assert login_page.email_error_text_is('A login and a password are required.')
 
 
+@pytest.mark.smoke
 @allure.feature('Login')
 @allure.story('Positive')
 def test_1_is_1():
