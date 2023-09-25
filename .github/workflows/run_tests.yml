@@ -35,3 +35,9 @@ jobs:
       - name: Run failed tests
         if: "github.event.inputs.deployment_target == 'failed'"
         run: pytest -m failed --alluredir=allure-results
+      - name: Save allure results
+        uses: actions/upload-artifact@v3
+        with:
+          name: allure-results
+          path: allure-results
+          retention-days: 1
