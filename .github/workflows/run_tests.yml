@@ -28,10 +28,10 @@ jobs:
         run: pip install -r requirements.txt
       - name: Run smoke tests
         if: "github.event.inputs.deployment_target == 'smoke'"
-        run: pytest -m smoke
+        run: pytest -m smoke --alluredir=allure-results
       - name: Run regression tests
         if: "github.event.inputs.deployment_target == 'regression'"
-        run: pytest -m regression
+        run: pytest -m regression --alluredir=allure-results
       - name: Run failed tests
         if: "github.event.inputs.deployment_target == 'failed'"
-        run: pytest -m failed
+        run: pytest -m failed --alluredir=allure-results
