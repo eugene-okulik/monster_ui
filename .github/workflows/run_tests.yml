@@ -6,12 +6,12 @@ on:
       deployment_target:
         description: Choose option
         required: true
-        default: first_test
+        default: smoke
         type: choice
         options:
-          - first_test
-          - ldskjsd
-          - sdlkjsdf
+          - smoke
+          - regression
+          - failed
 
 jobs:
   run-tests:
@@ -26,5 +26,12 @@ jobs:
           python-version: "3.10"
       - name: Set up dependancies
         run: pip install -r requirements.txt
-      - name: Run tests
-        run: pytest
+      - name: Run smoke tests
+        if: "github.event.inputs.deployment_target == 'smoke'"
+        run: pytest -m smoke
+      - name: Run regression tests
+        if: "github.event.inputs.deployment_target == 'regression'"
+        run: pytest -m regression
+      - name: Run failed tests
+        if: "github.event.inputs.deployment_target == 'failed'"
+        run: pytest -m failed
